@@ -1,10 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% lode staticfiles %}
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% block title %}我的博客{% endblock %}</title>
+    <link herf="{% static "css/base.css" %}" rel="stylesheet">
+    <link herf="{% static "css/index.css" %}" rel="stylesheet">
+    <link herf="{% static "css/m.css" %}" rel="stylesheet">
+    <link herf="{% static "css/info.css" %}" rel="stylesheet">
+    <link herf="{% static "css/js/jquery.css" %}" rel="stylesheet">
+    <link herf="{% static "css/js/comm.css" %}" rel="stylesheet">
+    <link herf="{% static "css/js/modernizr.css" %}" rel="stylesheet">
+    <link herf="{% static "css/js/scrollReveal.css" %}" rel="stylesheet">
 </head>
 <body>
-<span>定义项目公用模板</span>
+<header class="header-navigation" id="header">
+    <nav>
+        <div class="logo">
+            <a href="javascrapt:;">博客首页</a>
+        </div>
+        <h2 id="mnavh"><span class="navicon"></span></h2>
+        <ul id="starlist">
+            <li><a href="{% url 'article' id 1 %}">"我的日记"</a></li>
+            <li><a href="{% url 'album' id 1 %}">"我的相册"</a></li>
+            <li><a href="{% url 'about' id 1 %}">"关于我"</a></li>
+            <li><a href="{% url 'board' id %}">"留言"</a></li>
+            <li><a href="{% url 'admin:index' id %}">"博客后台管理"</a></li>
+        </ul>
+    </nav>
+</header>
+{% block body %}
+
+
+    <article>
+    <aside class="l_box">
+        <div class="about_me">
+            <h2>关于我</h2>
+            <ul>
+                {% if  user.photo %}
+                    <i><img src="{{ user.photo.url }}"></i>
+                {% else %}
+                    <i>
+                        <img src="{% static 'images/user.jpg' %}">
+                    </i>
+                {% endif %}
+                <p>
+                    <b>{{ user.name }}</b>, {{ user.introduce }}
+                </p>
+            </ul>
+        </div>
+        <div class="wdxc">
+            <h2>我的相册</h2>
+            <ul>
+                {% for a in album %}
+                    <li>
+                        <a href="javascript:;">
+                            <img src="{{ a.photo.url }}">
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="fenlei">
+            <h2>文章分类</h2>
+            <ul>
+                {% for t in tag %}
+                    <li><a href="/">{{ t.tag }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <h2>站长推荐</h2>
+            <ul>
+                <li>
+                    <a href="http://harryborrsion.cn" target="new">harryborrsion.cn</a>
+                    <a href="https://www.baidu.com" target="new">百度</a>
+                    <a href="http://www.bing.com" target="new">必应</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2>友情链接</h2>
+            <ul>
+                <li>
+                    <a href="http://harryborrsion.cn" target="new">harryborrsion.cn</a>
+                    <a href="https://www.baidu.com" target="new">百度</a>
+                    <a href="http://www.bing.com" target="new">必应</a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+{% endblock %}
+{% block content %}{% endblock %}
+</article>
+<a href="#" class="cd-top">Top</a>
+{% block script %}{% endblock %}
 </body>
 </html>

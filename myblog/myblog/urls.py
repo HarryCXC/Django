@@ -14,8 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include, re_path
+from django.views.static import serve
+from django.conf import settings
 
 urlpatterns = [
+    # Admin 后台系统
     path('admin/', admin.site.urls),
+    # 用户注册与登陆
+    path('user/', include('account.urls')),
+    # 博客文章
+    # path('', include('article.urls')),
+    # 图片墙
+    # path('album/', include('album.urls')),
+    # 留言板
+    # path('boards/', include('interflow.urls')),
+    # 配置媒体资源的路由信息
+    # re_path('media/(?P<path>.*)', serve,
+    #       {'document_root': settings.MEDIA_ROOT}, name='media'),
 ]
