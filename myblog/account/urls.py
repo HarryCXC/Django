@@ -6,5 +6,8 @@ urlpatterns = [
     path('register.html', register, name='register'),
 
     # 用户登陆
-    path('login.html', userLogin, name='userLogin')
+    path('login.html', userLogin, name='userLogin'),
+
+    # 关于我
+    path('baout/<int:id>.html', about, name='about')
 ]

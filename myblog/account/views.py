@@ -4,6 +4,8 @@ from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib.auth import authenticate
 from django.urls import reverse
+from album.models import AlbumInfo
+from article.models import ArticleTag
 
 
 # Create your views here.
@@ -63,3 +65,10 @@ def userLogin(request):
             kwargs = {'id': request.user.id, 'page': 1}
             return redirect(reverse('article', kwargs=kwargs))
     return render(request, 'user.html', locals())
+
+
+def about(request, id):
+    album = AlbumInfo.objects.filter(user_id=id)
+    tag = ArticleTag.objects.filter(user_id=id)
+    user = MyUser.objects.filter(id=id).first()
+    return render(request, 'about.html', locals())

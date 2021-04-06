@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'album',
     'article',
     'interflow',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +133,12 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'publicStatic')]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# 编辑器的配置信息
+CKEDITOR_UPLOAD_PATH = "article_images"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full'
+    }
+}
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+CKEDITOR_BROWSE_SHOW_DIRS = True
